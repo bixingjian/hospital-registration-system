@@ -1,0 +1,86 @@
+.main
+{
+    width: 1200px;
+    margin: auto;
+}
+#page
+{
+    text-align: center;
+}
+
+
+.searchDiv
+{
+    width: 800px;
+    margin-left: 200px;
+    float: left;
+}
+.tableDiv
+{
+    width: 1000px;
+    float: left;
+    margin-left: 200px;
+    margin-top: 10px;
+}
+.lsearchDiv-div
+{
+    float: left;
+    width: 800px;
+    margin-top: 10px;
+}
+.lsearchDiv-div input
+{
+    float: left;
+    width: 200px;
+}
+.lsearchDiv-div label
+{
+    float: left;
+    width: 130px;
+}
+.lsearchDiv-div  button
+{
+    margin-left: 10px;
+}
+
+.newUser
+{
+    display: none;
+}
+.newUser div
+{
+    width: 380px;
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+}
+.newUser label
+{
+    width: 70px;
+    float: left;
+}
+.newUser input
+{
+    width: 220px;
+    float: left;
+}
+.newUser textarea
+{
+    width: 220px;
+    height: 120px;
+    float: left;
+}
+.newUser img
+{
+    width: 70px;
+    height: 70px;
+    float: left;
+}
+.newUser input[type='radio']
+{
+    float: left;
+    width: 20px;
+    margin-top: 12px;
+}

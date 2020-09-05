@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.registration.dao.DoctorDao" >
+    <insert id="addNew" parameterType="com.demo.registration.entity.Doctor">
+       insert into doctor (doctorName,departmentId,num) values (#{doctor.doctorName},#{doctor.departmentId},#{doctor.num})
+    </insert>
+    <delete id="delete" parameterType="com.demo.registration.entity.Doctor">
+        delete from doctor where id=#{doctor.id}
+    </delete>
+    <select id="findInfo" resultType="com.demo.registration.entity.Doctor" parameterType="com.demo.registration.entity.Doctor">
+        select t1.id,t1.doctorName,t1.departmentId,t1.num,t2.departmentName from doctor t1 left join department t2 on t1.departmentId=t2.id
+        <where>
+        <if test="doctor.departmentName!=null and doctor.departmentName!='' ">
+            and t2.departmentName like CONCAT('%',#{doctor.departmentName},'%')
+        </if>
+            <if test="doctor.doctorName!=null and doctor.doctorName!='' ">
+                and t1.doctorName like CONCAT('%',#{doctor.doctorName},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="countInfo" resultType="int" parameterType="com.demo.registration.entity.Doctor">
+        select count(*) from doctor t1 left join department t2 on t1.departmentId=t2.id
+        <where>
+            <if test="doctor.departmentName!=null and doctor.departmentName!='' ">
+                and t2.departmentName like CONCAT('%',#{doctor.departmentName},'%')
+            </if>
+            <if test="doctor.doctorName!=null and doctor.doctorName!='' ">
+                and t1.doctorName like CONCAT('%',#{doctor.doctorName},'%')
+            </if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.demo.registration.entity.Doctor">
+        update doctor set
+        doctorName=#{doctor.doctorName},
+        departmentId=#{doctor.departmentId},
+        num=#{doctor.num}
+        where id=#{doctor.id}
+     </update>
+
+    <select id="findInfoByName" resultType="com.demo.registration.entity.Doctor" parameterType="com.demo.registration.entity.Doctor">
+        select t1.id,t1.doctorName,t1.departmentId,t1.num,t2.departmentName
+        from doctor t1
+        left join department t2 on t1.departmentId=t2.id
+         where t1.doctorName=#{doctor.doctorName} and t1.departmentId=#{doctor.departmentId}
+    </select>
+
+</mapper>

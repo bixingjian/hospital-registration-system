@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.registration.dao.DepartmentDao" >
+    <insert id="addNew" parameterType="com.demo.registration.entity.Department">
+       insert into department (departmentName) values (#{department.departmentName})
+    </insert>
+    <delete id="delete" parameterType="com.demo.registration.entity.Department">
+        delete from department where id=#{department.id}
+    </delete>
+    <select id="findInfo" resultType="com.demo.registration.entity.Department" parameterType="com.demo.registration.entity.Department">
+        select * from department a
+        <where>
+        <if test="department.departmentName!=null and department.departmentName!='' ">
+            and a.departmentName like CONCAT('%',#{department.departmentName},'%')
+        </if>
+        </where>
+    </select>
+
+    <select id="countInfo" resultType="int" parameterType="com.demo.registration.entity.Department">
+        select count(*) from department a
+        <where>
+        <if test="department.departmentName!=null and department.departmentName!='' ">
+            and a.departmentName like CONCAT('%',#{department.departmentName},'%')
+        </if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.demo.registration.entity.Department">
+        update department set departmentName=#{department.departmentName} where id=#{department.id}
+     </update>
+
+    <select id="findInfoByName" resultType="com.demo.registration.entity.Department" parameterType="com.demo.registration.entity.Department">
+        select * from department a where a.departmentName=#{department.departmentName}
+    </select>
+
+</mapper>

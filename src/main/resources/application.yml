@@ -1,0 +1,14 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /register
+spring:
+  profiles:
+   active: dev
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+mybatis:
+  mapperLocations: classpath:com/demo/registration/mapper/*.xml
+  typeAliasesPackage: com.registration.demo.entity

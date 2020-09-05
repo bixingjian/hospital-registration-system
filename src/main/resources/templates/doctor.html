@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>医生管理</title>
+<link rel="stylesheet" href="css/main.css"/>
+ <link rel="stylesheet" href="layer/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="layer/layui.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<ul class="layui-nav">
+    <li class="layui-nav-item"><a onclick="skip('doctor')">医生管理</a></li>
+    <li class="layui-nav-item"><a onclick="skip('department')">科室管理</a></li>
+    <script>
+        function skip(v) {
+            window.open(v)
+        }
+        </script>
+</ul>
+	<div id="main" class="main">
+        <div class="searchDiv">
+        	<div class="lsearchDiv-div" style="width:400px">
+                <label class="layui-form-label">科室名称：</label>
+                 <input type="text" v-model="param.departmentName" name="title"    placeholder="输入科室名称"  class="layui-input">
+           	</div>
+            <div class="lsearchDiv-div" style="width:400px">
+                <label class="layui-form-label">医生姓名：</label>
+                <input type="text" v-model="param.doctorName" name="title"    placeholder="输入医生姓名"  class="layui-input">
+            </div>
+            <div class="lsearchDiv-div">
+               <button class="layui-btn" style="margin-left:40px" @click="init(true)">查询</button>
+                <button class="layui-btn" @click="addNewInfo()">添加新医生</button>
+            </div>
+        </div>
+        <div class="tableDiv">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>医生姓名</th>
+                    <th>科室名称</th>
+                    <th>限号数量</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in tableInfo">
+                    <td :title="item.doctorName">{{item.doctorName}}</td>
+                    <td :title="item.departmentName">{{item.departmentName}}</td>
+                    <td :title="item.num" v-if="item.num!=-1"> {{item.num}}</td>
+                    <td :title="item.num" v-if="item.num==-1"> 不限号</td>
+                     <td>
+                        <img src="img/table-edit.png"  @click="edit(item)" title="编辑"/>
+                        <img src="img/table-delete.png"  @click="del(item.id)" title="删除"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="page"></div>
+        </div>
+
+       
+		<div class="newUser" id="newInfo" style="display:none">
+            <div>
+                <label class="layui-form-label">医生姓名：</label>
+                <input class="layui-input"  v-model="newParam.doctorName" placeholder="输入医生姓名">
+            </div>
+             <div>
+                <label class="layui-form-label">科室名称：</label>
+                <input class="layui-input"  v-model="newParam.departmentName" placeholder="输入科室名称">
+            </div>
+            <div>
+                <label class="layui-form-label">限号数量：</label>
+                <input class="layui-input"  v-model="newParam.num" placeholder="限号数量(-1为不限号)">
+            </div>
+            <div class="buttonDiv">
+            <button class="layui-btn" @click="addNew()">确定</button>
+            <button class="layui-btn" @click="closeWin()">取消</button>
+            </div>
+         </div>
+         
+         
+          <div class="newUser" id="editInfo" style="display:none">
+              <div>
+                  <label class="layui-form-label">医生姓名：</label>
+                  <input class="layui-input"  v-model="editParam.doctorName" placeholder="输入医生姓名">
+              </div>
+              <div>
+                  <label class="layui-form-label">科室名称：</label>
+                  <input class="layui-input"  v-model="editParam.departmentName" placeholder="输入科室名称">
+              </div>
+              <div>
+                  <label class="layui-form-label">限号数量：</label>
+                  <input class="layui-input"  v-model="editParam.num" placeholder="限号数量(-1为不限号)">
+              </div>
+            <div class="buttonDiv">
+            <button class="layui-btn" @click="update()">确定</button>
+            <button class="layui-btn" @click="closeWin()">取消</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/doctor.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>医生个人挂号管理</title>
+<link rel="stylesheet" href="css/main.css"/>
+ <link rel="stylesheet" href="layer/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="layer/layui.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<ul class="layui-nav">
+    <li class="layui-nav-item"><a>医生挂号处理</a></li>
+</ul>
+	<div id="main" class="main">
+        <div class="searchDiv">
+        	<div class="lsearchDiv-div" style="width:400px">
+                <label class="layui-form-label">患者姓名：</label>
+                 <input type="text" v-model="param.name" name="title"    placeholder="输入患者姓名"  class="layui-input">
+           	</div>
+            <div class="lsearchDiv-div">
+               <button class="layui-btn" style="margin-left:40px" @click="init(true)">查询</button>
+            </div>
+        </div>
+        <div class="tableDiv">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>患者姓名</th>
+                    <th>性别</th>
+                    <th>生日</th>
+                    <th>年龄</th>
+                    <th>身份证号码</th>
+                    <th>家庭住址</th>
+                    <th>是否已结束</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in tableInfo">
+                    <td :title="item.name">{{item.name}}</td>
+                    <td :title="item.sex">{{item.sex}}</td>
+                    <td :title="item.birthday">{{item.birthday}}</td>
+                    <td :title="item.age">{{item.age}}</td>
+                    <td :title="item.idCard">{{item.idCard}}</td>
+                    <td :title="item.address">{{item.address}}</td>
+                    <td v-if="item.finish==1">问诊已结束</td>
+                    <td v-if="item.finish==0">问诊未结束</td>
+                    <td>
+                        <a  v-if="item.finish==1" @click="edit(item)">重启问诊</a>
+                        <a  v-if="item.finish==0" @click="edit(item)">结束问诊</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="page"></div>
+        </div>
+    </div>
+    <script src="js/doctorDo.js"></script>
+</body>
+</html>
